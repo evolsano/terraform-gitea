@@ -7,3 +7,8 @@
 
 ### Added
 - Add ssh keypair and security group to allow ssh.
+
+## [0.0.3] - 2024-08-19
+
+### Added
+- Install Docker and Docker Compose.

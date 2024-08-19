@@ -12,8 +12,8 @@ provider "aws" {
   
 }
 
-resource "aws_security_group" "allow_ssh" {
-  name = "ssh"
+resource "aws_security_group" "cog_sg" {
+  name = "COG SG"
   
   ingress {
     from_port   = 22
@@ -39,9 +39,21 @@ resource "aws_instance" "gitea-ec2" {
   ami           = "ami-060e277c0d4cce553" #Ubuntu Server 24.04 LTS
   instance_type = "t2.micro"
   key_name      = aws_key_pair.wkl-cognixus-key.key_name
-  security_groups = [aws_security_group.allow_ssh.name]
+  security_groups = [aws_security_group.cog_sg.name]
 
   tags = {
     Name = "Gitea-Server"
+  }
+
+  #Provision the script
+  provisioner "file" {
+    source = "install_docker.sh"
+    destination = "/home/ubuntu/install_docker.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /home/ubuntu/install_docker.sh"
+     ]
   }
 }
