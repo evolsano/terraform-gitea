@@ -15,3 +15,5 @@
 - Install Gitea and Postgres.
 - Expose port 80.
 - Create VPC with single subnet.
+- Add multiple public and private subnet in 2 AZ(s).
+- Create ALB.

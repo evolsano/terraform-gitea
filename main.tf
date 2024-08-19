@@ -43,10 +43,10 @@ resource "aws_key_pair" "wkl-cognixus-key" {
   public_key = file("~/.ssh/cognixus.pub") # Path to your public key file
 }
 
-resource "aws_instance" "gitea-ec2" {
+resource "aws_instance" "gitea_ec2" {
   ami           = "ami-060e277c0d4cce553" #Ubuntu Server 24.04 LTS
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.cog_pub_subnet.id
+  subnet_id     = aws_subnet.cog_pub_subnet_1a.id
   key_name      = aws_key_pair.wkl-cognixus-key.key_name
   #security_groups = [aws_security_group.cog_sg.name]
   vpc_security_group_ids = [aws_security_group.cog_sg.id]
@@ -60,5 +60,5 @@ resource "aws_instance" "gitea-ec2" {
 
 # Output the public IP of the instance
 output "instance_public_ip" {
-  value = aws_instance.gitea-ec2.public_ip
+  value = aws_instance.gitea_ec2.public_ip
 }
