@@ -41,25 +41,9 @@ resource "aws_instance" "gitea-ec2" {
   key_name      = aws_key_pair.wkl-cognixus-key.key_name
   security_groups = [aws_security_group.cog_sg.name]
 
-  user_data = <<-EOF
-    #!/bin/bash
-    #Run Docker installation script
-    bash /home/ubuntu/install_docker.sh
-    EOF
+  user_data = file("install_docker.sh")
 
   tags = {
     Name = "Gitea-Server"
-  }
-
-  #Provision the script
-  provisioner "file" {
-    source = "install_docker.sh"
-    destination = "/home/ubuntu/install_docker.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /home/ubuntu/install_docker.sh"
-     ]
   }
 }
