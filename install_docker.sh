@@ -35,3 +35,49 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 # Manage Docker as a non-root user (optional)
 sudo usermod -aG docker ubuntu
+
+# Create a directory for Docker Compose files
+mkdir -p /home/ubuntu/gitea
+
+# Create a Docker Compose file for Gitea and PostgreSQL
+cat <<EOL > /home/ubuntu/gitea/docker-compose.yml
+version: '3'
+services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=gitea
+      - POSTGRES_USER=gitea
+      - POSTGRES_PASSWORD=gitea
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - gitea_network
+
+  gitea:
+    image: gitea/gitea:latest
+    ports:
+      - "80:3000"
+      - "2222:22"
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__Database_TYPE=postgres
+      - GITEA__Database_HOST=db:5432
+      - GITEA__Database_NAME=gitea
+      - GITEA__Database_USER=gitea
+      - GITEA__Database_PASSWD=gitea
+    volumes:
+      - ./gitea_data:/data
+    depends_on:
+      - db
+    networks:
+      - gitea_network
+
+networks:
+  gitea_network:
+EOL
+
+# Run Docker Compose to start Gitea and PostgreSQL
+cd /home/ubuntu/gitea
+docker-compose up -d

@@ -14,6 +14,13 @@ provider "aws" {
 
 resource "aws_security_group" "cog_sg" {
   name = "COG SG"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   
   ingress {
     from_port   = 22
@@ -46,4 +53,9 @@ resource "aws_instance" "gitea-ec2" {
   tags = {
     Name = "Gitea-Server"
   }
+}
+
+# Output the public IP of the instance
+output "instance_public_ip" {
+  value = aws_instance.gitea-ec2.public_ip
 }

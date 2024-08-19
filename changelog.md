@@ -12,3 +12,5 @@
 
 ### Added
 - Install Docker and Docker Compose.
+- Install Gitea and Postgres.
+- Expose port 80.
