@@ -17,3 +17,5 @@
 - Create VPC with single subnet.
 - Add multiple public and private subnet in 2 AZ(s).
 - Create ALB.
+- Created SSL in ACM.
+- Add HTTPS and HTTP redirect to HTTPS.
