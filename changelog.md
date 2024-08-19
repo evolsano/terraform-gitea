@@ -19,3 +19,7 @@
 - Create ALB.
 - Created SSL in ACM.
 - Add HTTPS and HTTP redirect to HTTPS.
+  
+## [0.1.0]
+
+First release.
