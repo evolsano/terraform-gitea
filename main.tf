@@ -46,7 +46,7 @@ resource "aws_security_group" "cog_sg" {
 }
 
 resource "aws_key_pair" "wkl-cognixus-key" {
-  key_name   = "wkl-cognixus2"
+  key_name   = "wkl-cognixus"
   public_key = file("~/.ssh/cognixus.pub") # Path to your public key file
 }
 
