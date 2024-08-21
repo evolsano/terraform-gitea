@@ -3,7 +3,7 @@
 # Exit on any error
 set -e
 
-# Backup and replace source list
+# Backup and replace source list. AWS default data transfer within region 1GB only.
 sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
 sudo sed -i 's/ap-southeast-1.ec2.//g' /etc/apt/sources.list.d/ubuntu.sources
 
