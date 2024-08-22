@@ -6,8 +6,9 @@ These are basic steps. [Work In Progress]
 
 1. Create EC2 with security group via Terraform. [main.tf]
 2. Create VPC. [vpc.tf]
-3. Create Application Load Balancer via Terraform. [alb.tf]
-4. Create Gitea docker container via Terraform. [install_docker.sh]
+3. Apply SSL certificate in ACM.
+4. Create Application Load Balancer via Terraform. [alb.tf]
+5. Create Gitea docker container via Terraform. [install_docker.sh]
 
 # Commands
 
